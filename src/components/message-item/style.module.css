@@ -1,0 +1,35 @@
+.message {
+    max-width: 886px;
+    width: 100%;
+    min-height: 315px;
+    background: #FFFFFF;
+    border-radius: 1px;
+    padding: 10px;
+}
+
+.wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.block {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date {
+    
+}
+
+.content {
+    
+}
+
+.attachment {
+    height: 146px;
+    width: 259px;
+    border-radius: 4px;
+}

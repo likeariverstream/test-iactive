@@ -1,4 +1,5 @@
 export interface PositionButtonProps {
     text: string
-    onClick: () => void
+    onClick?: () => void
+    type?: 'button' | 'submit' | 'reset'
 }

@@ -5,6 +5,7 @@ export const fetchMessages = createAsyncThunk(
     async () => {
         const formData = new FormData()
         formData.append('actionName', 'MessagesLoad')
+        formData.append('messageId', '0')
         try {
             const response = await fetch('/api', {
                 method: 'POST',

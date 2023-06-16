@@ -1,0 +1,29 @@
+.section {
+    display: flex;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.image {
+    display: block;
+    width: 36px;
+    height: 36px;
+}
+.username {
+    display: block;
+    margin: 0;
+    font-size: 16px;
+    line-height: 13px;
+    color: #808080;
+}
+.comment {
+    display: block;
+    margin: 0;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 9px;
+}

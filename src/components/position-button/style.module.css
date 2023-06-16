@@ -1,4 +1,5 @@
 .button {
+    background: none;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -9,4 +10,11 @@
     height: 28px;
     border: 1px solid #0088EE;
     border-radius: 2px;
+    color: #0088EE;
+    transition: ease-in-out;
+}
+
+.button:hover {
+    cursor: pointer;
+    opacity: 0.6;
 }
