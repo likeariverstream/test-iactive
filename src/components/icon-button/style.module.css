@@ -1,0 +1,12 @@
+.button {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 64px;
+    height: 28px;
+    border: 1px solid #0088EE;
+    border-radius: 2px;
+}

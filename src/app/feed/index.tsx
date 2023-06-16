@@ -11,6 +11,6 @@ export const Feed = () => {
       }, [dispatch]);
 
     return (
-        <></>
+        <><p>JFjd;fdkfdj;fdsj;fs</p></>
     )
 }
