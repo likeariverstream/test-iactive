@@ -5,6 +5,7 @@ export interface Feed {
 }
 
 export interface Message {
+    _id: string
     author: string
     content: string
     channel: string
@@ -13,6 +14,7 @@ export interface Message {
     attachments: Attachment[]
     senderNumber: string
     region: string
+    isLike?: boolean
 }
 
 export interface Attachment {

@@ -1,0 +1,22 @@
+.spinner {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 6px solid #CDCDCD;
+    border-top-color: #0088EE;
+    position: fixed;
+    opacity: .6;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin .6s ease-in-out infinite;
+}
+
+@keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}

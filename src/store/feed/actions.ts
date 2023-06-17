@@ -17,3 +17,22 @@ export const fetchMessages = createAsyncThunk(
         }
     }
 )
+
+export const fetchNewMessages = createAsyncThunk(
+    'fetch/newMessages',
+    async (messageId: string) => {
+        const formData = new FormData()
+        formData.append('actionName', 'MessagesLoad')
+        formData.append('messageId', messageId)
+        formData.append('oldMessages', 'false')
+        try {
+            const response = await fetch('/api', {
+                method: 'POST',
+                body: formData,
+            })
+            return response.json()
+        } catch (e) {
+            console.warn(e)
+        }
+    }
+)

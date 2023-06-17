@@ -25,11 +25,16 @@
 }
 
 .content {
-    
+    overflow: hidden;
 }
 
-.attachment {
-    height: 146px;
-    width: 259px;
-    border-radius: 4px;
+.then {
+    background: none;
+    border: none;
+    transition: ease-in-out;
+}
+
+.then:hover {
+    cursor: pointer;
+    opacity: 0.6;
 }
