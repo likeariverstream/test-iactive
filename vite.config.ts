@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
         resolve: {
             alias: {}
         },
+
         server: {
             host: true,
             strictPort: false,
@@ -19,6 +20,7 @@ export default defineConfig(({ mode }) => {
                     rewrite: (path) => path.replace(/^\/api/, ''),
                 },
             },
+            base: '/test-iactive/'
         }
     }
 })
