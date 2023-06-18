@@ -10,9 +10,7 @@
     "fix": "eslint src --ext ts,tsx,js,jsx --fix",
     "preview": "vite preview",
     "typescript": "tsc --noEmit",
-    "stylelint": "stylelint .",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "stylelint": "stylelint ."
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
