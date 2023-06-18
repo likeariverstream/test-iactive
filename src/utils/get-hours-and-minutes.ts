@@ -6,4 +6,4 @@ export const getHoursAndMinutes = (dateString: string) => {
     const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes
 
     return `${formattedHours}:${formattedMinutes}`
-  }
+}

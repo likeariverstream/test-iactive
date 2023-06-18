@@ -5,6 +5,9 @@
     padding: 0;
     border-radius: 0;
     transition: ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button>svg {
@@ -13,5 +16,22 @@
 
 .button:hover {
     cursor: pointer;
-    opacity: 0.6;
+}
+
+.button:hover .tooltip{
+    visibility: visible;
+}
+
+.tooltip {
+    background: #f9f9f9;
+    visibility: hidden;
+    position: absolute;
+    transform: translate(5px, 40px);
+    padding: 5px 10px;
+    border: 1px solid #0088EE;
+    border-radius: 2px;
+    color: #0088EE;
+    font-size: 12px;
+    line-height: 10px;
+    transition: visible 0.6s ease-in-out;
 }

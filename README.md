@@ -1,5 +1,23 @@
-# Лента сообщений
+## Лента сообщений. 
+### React, Redux, Typescript
 
-# npm install
+## Для разработки:
 
-# npm run dev
+### npm install
+### npm run dev
+
+## Запустить ESLint:
+
+### npm run lint
+
+## Исправить:
+
+### npm run fix
+
+## Запустить Stylelint:
+
+### npm run stylelint
+
+## Запустить TypeScript:
+
+### npm run typescript

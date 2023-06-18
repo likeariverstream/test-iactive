@@ -1,5 +1,5 @@
-import React, { useEffect, memo, useCallback, useMemo } from 'react'
-import { fetchMessages, fetchNewMessages } from '../../store/feed/actions'
+import React, { useEffect, memo, useCallback, useMemo, useRef } from 'react'
+import { fetchMessages, fetchNewMessages, fetchOldMessages } from '../../store/feed/actions'
 import { useAppDispatch } from '../../hooks/use-app-dispatch'
 import { useAppSelector } from '../../hooks/use-app-selector'
 import { shallowEqual } from 'react-redux'
@@ -15,84 +15,106 @@ import { deleteLike, reverseMessages, setLike } from '../../store/feed/slice'
 import { Spinner } from '../../components/spinner'
 
 export const Feed = memo(() => {
-  const dispatch = useAppDispatch()
-  const messages = useAppSelector((state) => state.feed.messages, shallowEqual)
-  const loading = useAppSelector((state) => state.feed.loading, shallowEqual)
-  const lastMessageId = useAppSelector((state) => state.feed.lastMessageId, shallowEqual)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      dispatch(fetchNewMessages(lastMessageId))
-    }, 5000);
-    return () => clearInterval(interval)
-  }, [dispatch, lastMessageId])
-  useEffect(() => {
-    dispatch(fetchMessages())
-  }, [])
+    const dispatch = useAppDispatch()
+    const messages = useAppSelector((state) => state.feed.messages, shallowEqual)
+    const loading = useAppSelector((state) => state.feed.loading, shallowEqual)
+    const lastMessageId = useAppSelector((state) => state.feed.lastMessageId, shallowEqual)
+    const loaderRef = useRef<HTMLDivElement | null>(null)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            dispatch(fetchNewMessages(lastMessageId))
+        }, 5000)
+        return () => clearInterval(interval)
+    }, [dispatch, lastMessageId])
 
-  const callbacks = {
-    icon: {
-      onSetLike: useCallback((id: string) => {
-        dispatch(setLike(id))
-      }, [dispatch]),
-      onDeleteLike: useCallback((id: string) => {
-        dispatch(deleteLike(id))
-      }, [dispatch])
-    },
-    onReverseMessages: useCallback(() => dispatch(reverseMessages()), [messages]),
-    onClick: useCallback(() => true, [])
-  }
-  const options = useMemo(() => {
-    return {
-      icons: {
-        sources: {
-          activeFavouriteSrc,
-          inactiveFavouriteSrc,
-          hideSrc,
-          sendSrc,
-          settingsSrc,
+    useEffect(() => {
+        dispatch(fetchMessages())
+    }, [dispatch])
+
+    useEffect(() => {
+        const callback = () => {
+            const { current } = loaderRef
+            if (!current) {
+                return
+            }
+            const { bottom } = current.getBoundingClientRect()
+            if (bottom <= window.innerHeight) {
+                dispatch(fetchOldMessages())
+            }
+        }
+        window.addEventListener('scroll', callback)
+        return () => window.removeEventListener('scroll', callback)
+    }, [dispatch])
+    const callbacks = {
+        icons: {
+            onSetLike: useCallback((id: string) => {
+                dispatch(setLike(id))
+            }, [dispatch]),
+            onDeleteLike: useCallback((id: string) => {
+                dispatch(deleteLike(id))
+            }, [dispatch])
         },
-        alts: {
-          favourite: 'Избранное',
-          hide: 'Скрыть',
-          send: 'Отправить',
-          settings: 'Настройки',
-        }
-      },
-      position: {
-        text: {
-          left: 'Левый',
-          center: 'Центр',
-          right: 'Правый',
-        }
-      }
+        onReverseMessages: useCallback(() => dispatch(reverseMessages()), [dispatch]),
     }
-  }, [])
 
-  return (
-    <Spinner active={loading}>
-      <FeedLayout>
-        {messages.map((message) => {
-          console.log(message.date)
-          return <MessageItem
-            id={message._id}
-            key={message._id}
-            text={options.position.text}
-            onSetLike={callbacks.icon.onSetLike}
-            onDeleteLike={callbacks.icon.onDeleteLike}
-            onReverseMessages={callbacks.onReverseMessages}
-            onClick={callbacks.onClick}
-            src={options.icons.sources}
-            alt={options.icons.alts}
-            username={message.author}
-            avatar={avatar}
-            comment={message.channel}
-            date={message.date}
-            content={message.content}
-            attachments={message.attachments}
-            isLike={message.isLike}
-          />
-        })}
-      </FeedLayout>
-    </Spinner>
-  )
+    const options = useMemo(() => {
+        return {
+            icons: {
+                sources: {
+                    activeFavouriteSrc,
+                    inactiveFavouriteSrc,
+                    hideSrc,
+                    sendSrc,
+                    settingsSrc,
+                },
+                alts: {
+                    favourite: 'Избранное',
+                    hide: 'Скрыть',
+                    send: 'Отправить',
+                    settings: 'Настройки',
+                },
+                tooltips: {
+                    hide: 'Свернуть сообщение',
+                    settings: 'Изменить порядок сообщений',
+                    favourite: 'Добавить в избранное',
+                    notFavourite: 'Убрать из избранного'
+                }
+            },
+            position: {
+                text: {
+                    left: 'Левый',
+                    center: 'Центр',
+                    right: 'Правый',
+                }
+            }
+        }
+    }, [])
+
+    return (
+        <Spinner active={loading}>
+            <FeedLayout ref={loaderRef}>
+                {messages.map((message) => {
+                    return <MessageItem
+                        id={message._id}
+                        key={message._id}
+                        text={options.position.text}
+                        onSetLike={callbacks.icons.onSetLike}
+                        onDeleteLike={callbacks.icons.onDeleteLike}
+                        onReverseMessages={callbacks.onReverseMessages}
+                        sources={options.icons.sources}
+                        tooltips={options.icons.tooltips}
+                        alts={options.icons.alts}
+                        username={message.author}
+                        avatar={avatar}
+                        comment={message.channel}
+                        date={message.date}
+                        content={message.content}
+                        attachments={message.attachments}
+                        isLike={message.isLike}
+                        isNew={message.isNew}
+                    />
+                })}
+            </FeedLayout>
+        </Spinner>
+    )
 })

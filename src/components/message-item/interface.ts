@@ -2,11 +2,11 @@ export interface MessageItemProps {
     id: string
     onSetLike: (id: string) => void
     onDeleteLike: (id: string) => void
-    onClick: () => void
     text: Record<string, string>
     type?: 'button' | 'submit' | 'reset'
-    src: Record<string, string>
-    alt: Record<string, string>
+    sources: Record<string, string>
+    tooltips: Record<string, string>
+    alts: Record<string, string> 
     username: string
     comment?: string
     avatar: string
@@ -18,4 +18,6 @@ export interface MessageItemProps {
     }[]
     isLike?: boolean
     onReverseMessages: () => void
+    isNew?: boolean
+    isLastMessage?: boolean
 }

@@ -15,6 +15,7 @@ export interface Message {
     senderNumber: string
     region: string
     isLike?: boolean
+    isNew?: boolean
 }
 
 export interface Attachment {

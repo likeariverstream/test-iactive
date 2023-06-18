@@ -1,16 +1,29 @@
 .message {
+    box-sizing: border-box;
     max-width: 886px;
     width: 100%;
-    min-height: 315px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     background: #FFFFFF;
     border-radius: 1px;
     padding: 10px;
 }
 
-.wrapper {
+.buttons{
     display: flex;
     gap: 10px;
     align-items: center;
+    margin-left: auto;
+    justify-content: center;
+}
+
+.icons{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 29px;
 }
 
 .block {
@@ -20,21 +33,54 @@
     align-items: center;
 }
 
+.wrapper {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    align-items: baseline;
+}
+
 .date {
-    
+    display: block;
+    margin: 0;
+    font-size: 14px;
+    line-height: 9px;
+    text-align: center;
+    color: #808080;
 }
 
 .content {
     overflow: hidden;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.035em;
+    color: #333333;
 }
 
 .then {
     background: none;
     border: none;
+    padding: 0;
     transition: ease-in-out;
+    font-size: 12px;
+    line-height: 10px;
+    color: #808080;
 }
 
 .then:hover {
     cursor: pointer;
     opacity: 0.6;
+}
+
+.tag {
+    font-size: 12px;
+    line-height: 10px;
+    color: #0088EE;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
 }

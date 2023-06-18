@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "lint": "eslint src --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0",
+    "fix": "eslint src --ext ts,tsx,js,jsx --fix",
+    "preview": "vite preview",
+    "typescript": "tsc --noEmit",
+    "stylelint": "stylelint ."
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -25,7 +28,9 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "typescript": "^5.0.2",
+    "stylelint": "^15.8.0",
+    "stylelint-config-standard": "^33.0.0",
+    "typescript": "5.0",
     "vite": "^4.3.9"
   }
 }

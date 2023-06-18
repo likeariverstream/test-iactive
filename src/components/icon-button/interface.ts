@@ -1,6 +1,7 @@
 export interface IconButtonProps {
     src: string
     alt: string
-    onClick: () => void
+    onClick?: () => void
     type?: 'button' | 'submit' | 'reset'
+    tooltip?: string
 }

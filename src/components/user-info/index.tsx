@@ -1,6 +1,6 @@
-import React, { memo } from "react";
+import React, { memo } from 'react'
 import style from './style.module.css'
-import { UserInfoProps } from "./interface";
+import { UserInfoProps } from './interface'
 
 export const UserInfo = memo((props: UserInfoProps) => {
     const { username, comment, src } = props
