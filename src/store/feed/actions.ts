@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-
+const url = import.meta.env.VITE_API_URL
 export const fetchMessages = createAsyncThunk(
     'fetch/messages',
     async () => {
@@ -7,7 +7,7 @@ export const fetchMessages = createAsyncThunk(
         formData.append('actionName', 'MessagesLoad')
         formData.append('messageId', '0')
         try {
-            const response = await fetch('/api', {
+            const response = await fetch(url, {
                 method: 'POST',
                 body: formData,
             })
@@ -26,7 +26,7 @@ export const fetchNewMessages = createAsyncThunk(
         formData.append('messageId', messageId)
         formData.append('oldMessages', 'false')
         try {
-            const response = await fetch('/api', {
+            const response = await fetch(url, {
                 method: 'POST',
                 body: formData,
             })
@@ -45,7 +45,7 @@ export const fetchOldMessages = createAsyncThunk(
         // formData.append('messageId', messageId)
         formData.append('oldMessages', 'true')
         try {
-            const response = await fetch('/api', {
+            const response = await fetch(url, {
                 method: 'POST',
                 body: formData,
             })

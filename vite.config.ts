@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig(({ mode }) => {
     process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
-    const isProduction = process.env.NODE_ENV === 'production'
     return {
         plugins: [react()],
         resolve: {
@@ -13,7 +12,7 @@ export default defineConfig(({ mode }) => {
             host: true,
             strictPort: false,
             port: 8000,
-            proxy: isProduction ? undefined : {
+            proxy: {
                 '/api': {
                     target: 'http://a0830433.xsph.ru',
                     changeOrigin: true,
