@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { fetchMessages, fetchNewMessages, fetchOldMessages } from './actions'
 import { Message } from './interfaces'
 import { nanoid } from '@reduxjs/toolkit'
+import { sortByDate } from '../../utils/sort-by-date'
 
 interface InitialState {
   messages: Message[]
@@ -54,8 +55,7 @@ const feedSlice = createSlice({
                     return { ...item, isLike: false, _id: item.id, isNew: true }
                 }
             })
-            const sortedMessages = modifiedMessages
-                .sort((a: Message, b: Message) => new Date(b.date).getTime() - new Date(a.date).getTime())
+            const sortedMessages = sortByDate(modifiedMessages)
             state.messages = sortedMessages
             state.lastMessageId = sortedMessages[sortedMessages.length - 1].id
             state.loading = false
@@ -74,8 +74,7 @@ const feedSlice = createSlice({
                 const modifiedMessages = action.payload.Messages.map((item: Message) => {
                     return { ...item, _id: nanoid(), isNew: true }
                 })
-                const sortedMessages = modifiedMessages
-                    .sort((a: Message, b: Message) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                const sortedMessages = sortByDate(modifiedMessages)
                 const modifiedOldMessages = state.messages.map((item) => ({ ...item, isNew: false }))
                 state.messages = state.isReversed 
                     ? [...sortedMessages, ...modifiedOldMessages,] : [...modifiedOldMessages, ...sortedMessages]
@@ -91,8 +90,7 @@ const feedSlice = createSlice({
                     return { ...item, isLike: false, _id: item.id, isNew: false }
                 }
             })
-            const sortedMessages = modifiedMessages
-                .sort((a: Message, b: Message) => new Date(b.date).getTime() - new Date(a.date).getTime())
+            const sortedMessages = sortByDate(modifiedMessages)
             const newMessages = state.messages.filter((item) => item._id !== item.id)
             state.messages = [...sortedMessages, ...newMessages]
             state.lastMessageId = state.messages[state.messages.length - 1].id
