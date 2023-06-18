@@ -10,7 +10,9 @@
     "fix": "eslint src --ext ts,tsx,js,jsx --fix",
     "preview": "vite preview",
     "typescript": "tsc --noEmit",
-    "stylelint": "stylelint ."
+    "stylelint": "stylelint .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -28,6 +30,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "gh-pages": "^5.0.0",
     "stylelint": "^15.8.0",
     "stylelint-config-standard": "^33.0.0",
     "typescript": "5.0",

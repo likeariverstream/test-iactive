@@ -21,5 +21,3 @@
 ## Запустить TypeScript:
 
 ### npm run typescript
-
-[Деплой](https://test-isactive.onrender.com/)
