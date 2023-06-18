@@ -12,7 +12,7 @@
     "typescript": "tsc --noEmit",
     "stylelint": "stylelint .",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
